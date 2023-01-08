@@ -17,7 +17,8 @@ public class BlogController {
         });
         get("/review/post/:id", (req, res) -> {
             String id = req.params("id");
-
+            res.body(postStore.getSavedPostId(id));
+            res.type("application-json");
             return res.body();
         });
         post("/new/post", (req,res) -> {
