@@ -1,5 +1,4 @@
 package org.example;
-import java.time.LocalDateTime;
 
 import static spark.Spark.*;
 
@@ -7,8 +6,9 @@ import static spark.Spark.*;
 public class Main {
     public static void main(String[] args) {
         port(3498);
-        Blog blog = new Blog();
+        PostService postService = new PostService();
+        PostStore postStore = new PostStore(postService);
         BlogController blogController = new BlogController();
-        blogController.routesInit();
+        blogController.routesInit(postStore);
     }
 }

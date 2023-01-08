@@ -9,9 +9,10 @@ public class BlogController {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    public void routesInit(){
+    public void routesInit(PostStore postStore){
         get("/review/All", (req, res) -> {
-
+            res.body(postStore.getSavedPosts());
+            res.type("application-json");
             return res.body();
         });
         get("/review/post/:id", (req, res) -> {
@@ -20,8 +21,9 @@ public class BlogController {
             return res.body();
         });
         post("/new/post", (req,res) -> {
-
-            res.body("Cokolwiek");
+            Post post = objectMapper.readValue(req.body(), Post.class);
+            postStore.addPostToSaved(post);
+            res.body("Nowy post zapisany");
             return res.body();
         });
         delete("/delete",(req,res) -> {

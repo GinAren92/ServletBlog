@@ -11,7 +11,8 @@ public class Post {
     private String author;
 
     public Post(){
-
+        date = LocalDateTime.now();
+        this.id = UUID.randomUUID().toString();
     }
     public Post(String title, String content, String author){
         date = LocalDateTime.now();
