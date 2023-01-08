@@ -27,12 +27,14 @@ public class BlogController {
             return res.body();
         });
         delete("/delete",(req,res) -> {
-
+            postStore.deletePosts();
+            res.body("Deleted all posts");
             return res.body();
         });
         delete("/delete/post/:id",(req,res) -> {
             String id = req.params("id");
-
+            postStore.deletePostId(id);
+            res.body("Deleted post with id: "+id);
             return res.body();
         });
     }

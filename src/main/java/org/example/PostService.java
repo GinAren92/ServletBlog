@@ -29,5 +29,14 @@ public class PostService {
 
         return allPosts;
     }
+    public String getPostId(Post post){
+        String postString = null;
+        try {
+            postString = objMapper.writerWithDefaultPrettyPrinter().writeValueAsString(post);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return postString;
+    }
 
 }

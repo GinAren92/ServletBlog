@@ -28,8 +28,8 @@ public class PostStore {
     public String getSavedPosts() {
         return postService.getSavedPosts(this.getAll());
     }
-    public Post getSavedPostId(String id) {
-        return savedPosts.get(id);
+    public String getSavedPostId(String id) {
+        return postService.getPostId(savedPosts.get(id));
     }
     public void deletePostId(String id) {
         savedPosts.remove(id);
