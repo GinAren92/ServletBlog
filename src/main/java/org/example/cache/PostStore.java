@@ -1,15 +1,13 @@
-package org.example;
+package org.example.cache;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.example.util.Post;
+import org.example.service.PostService;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class PostStore {
     private final PostService postService;
-    private Map<String,Post> savedPosts = new HashMap<>();
+    private Map<String, Post> savedPosts = new HashMap<>();
 
     public Collection<Post> getAll(){
         return savedPosts.values();
@@ -29,7 +27,7 @@ public class PostStore {
         return postService.getSavedPosts(this.getAll());
     }
     public String getSavedPostId(String id) {
-        return postService.getPostId(savedPosts.get(id));
+        return postService.getPostById(savedPosts.get(id));
     }
     public void deletePostId(String id) {
         savedPosts.remove(id);

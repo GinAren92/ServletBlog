@@ -1,13 +1,14 @@
-package org.example;
+package org.example.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.cache.PostStore;
+import org.example.util.Post;
 
 import static spark.Spark.*;
 import static spark.Spark.delete;
 
 public class BlogController {
     private final ObjectMapper objectMapper = new ObjectMapper();
-
 
     public void routesInit(PostStore postStore){
         get("/review/All", (req, res) -> {
@@ -24,18 +25,18 @@ public class BlogController {
         post("/new/post", (req,res) -> {
             Post post = objectMapper.readValue(req.body(), Post.class);
             postStore.addPostToSaved(post);
-            res.body("Nowy post zapisany");
+            res.body("New post saved");
             return res.body();
         });
         delete("/delete",(req,res) -> {
             postStore.deletePosts();
-            res.body("Deleted all posts");
+            res.body("All posts deleted");
             return res.body();
         });
         delete("/delete/post/:id",(req,res) -> {
             String id = req.params("id");
             postStore.deletePostId(id);
-            res.body("Deleted post with id: "+id);
+            res.body("Post with id: "+id+", deleted.");
             return res.body();
         });
     }

@@ -1,13 +1,12 @@
-package org.example;
+package org.example.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.example.util.Post;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 public class PostService {
     private static final ObjectMapper objMapper = new ObjectMapper();
@@ -24,17 +23,17 @@ public class PostService {
         try {
             allPosts = objMapper.writerWithDefaultPrettyPrinter().writeValueAsString(savedPosts);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new Error(e);
         }
 
         return allPosts;
     }
-    public String getPostId(Post post){
+    public String getPostById(Post post){
         String postString = null;
         try {
             postString = objMapper.writerWithDefaultPrettyPrinter().writeValueAsString(post);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new Error(e);
         }
         return postString;
     }

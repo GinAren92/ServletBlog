@@ -1,16 +1,19 @@
-package org.example;
+package org.example.util;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Post {
-    private String id;
-    private LocalDateTime date;
-    private String title;
-    private String content;
-    private String author;
+    private final String id;
+    private final LocalDateTime date;
+    private final String title;
+    private final String content;
+    private final String author;
 
     public Post(){
+        title=null;
+        content=null;
+        author=null;
         date = LocalDateTime.now();
         this.id = UUID.randomUUID().toString();
     }
